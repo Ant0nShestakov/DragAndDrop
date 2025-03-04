@@ -28,7 +28,7 @@ public partial class @IAS_Default_InputMap: IInputActionCollection2, IDisposable
             ""id"": ""df70fa95-8a34-4494-b137-73ab6b9c7d37"",
             ""actions"": [
                 {
-                    ""name"": ""Look"",
+                    ""name"": ""Move"",
                     ""type"": ""Value"",
                     ""id"": ""6b444451-8a00-4d00-a97e-f47457f736a8"",
                     ""expectedControlType"": ""Vector2"",
@@ -42,22 +42,20 @@ public partial class @IAS_Default_InputMap: IInputActionCollection2, IDisposable
                     ""id"": ""6c2ab1b8-8984-453a-af3d-a3c78ae1679a"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Drag"",
+                    ""type"": ""Value"",
+                    ""id"": ""98695c8b-7ffc-44ef-8209-77c457bb8d88"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""c1f7a91b-d0fd-4a62-997e-7fb9b69bf235"",
-                    ""path"": ""<Gamepad>/rightStick"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""8c8e490b-c610-4785-884f-f04217b23ca4"",
@@ -65,29 +63,7 @@ public partial class @IAS_Default_InputMap: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse;Touch"",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""3e5f5442-8668-4b27-a940-df99bad7e831"",
-                    ""path"": ""<Joystick>/{Hatswitch}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""Look"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""143bb1cd-cc10-4eca-a2f0-a3664166fe91"",
-                    ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": "";Gamepad"",
-                    ""action"": ""Interact"",
+                    ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -105,7 +81,7 @@ public partial class @IAS_Default_InputMap: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""886e731e-7071-4ae4-95c0-e61739dad6fd"",
-                    ""path"": ""<Touchscreen>/primaryTouch/tap"",
+                    ""path"": ""<Touchscreen>/Press"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Touch"",
@@ -115,34 +91,12 @@ public partial class @IAS_Default_InputMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ee3d0cd2-254e-47a7-a8cb-bc94d9658c54"",
-                    ""path"": ""<Joystick>/trigger"",
+                    ""id"": ""b3f9fa6d-0418-4b23-9a88-9167cc8ac65a"",
+                    ""path"": ""<Pointer>/position"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Joystick"",
-                    ""action"": ""Interact"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""8255d333-5683-4943-a58a-ccb207ff1dce"",
-                    ""path"": ""<XRController>/{PrimaryAction}"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""XR"",
-                    ""action"": ""Interact"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""b3c1c7f0-bd20-4ee7-a0f1-899b24bca6d7"",
-                    ""path"": ""<Keyboard>/enter"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
-                    ""action"": ""Interact"",
+                    ""groups"": "";Keyboard&Mouse;Touch"",
+                    ""action"": ""Drag"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -730,8 +684,9 @@ public partial class @IAS_Default_InputMap: IInputActionCollection2, IDisposable
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_Look = m_Player.FindAction("Look", throwIfNotFound: true);
+        m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_Drag = m_Player.FindAction("Drag", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -811,14 +766,16 @@ public partial class @IAS_Default_InputMap: IInputActionCollection2, IDisposable
     // Player
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-    private readonly InputAction m_Player_Look;
+    private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_Drag;
     public struct PlayerActions
     {
         private @IAS_Default_InputMap m_Wrapper;
         public PlayerActions(@IAS_Default_InputMap wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Look => m_Wrapper.m_Player_Look;
+        public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @Drag => m_Wrapper.m_Player_Drag;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -828,22 +785,28 @@ public partial class @IAS_Default_InputMap: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
-            @Look.started += instance.OnLook;
-            @Look.performed += instance.OnLook;
-            @Look.canceled += instance.OnLook;
+            @Move.started += instance.OnMove;
+            @Move.performed += instance.OnMove;
+            @Move.canceled += instance.OnMove;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @Drag.started += instance.OnDrag;
+            @Drag.performed += instance.OnDrag;
+            @Drag.canceled += instance.OnDrag;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
         {
-            @Look.started -= instance.OnLook;
-            @Look.performed -= instance.OnLook;
-            @Look.canceled -= instance.OnLook;
+            @Move.started -= instance.OnMove;
+            @Move.performed -= instance.OnMove;
+            @Move.canceled -= instance.OnMove;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @Drag.started -= instance.OnDrag;
+            @Drag.performed -= instance.OnDrag;
+            @Drag.canceled -= instance.OnDrag;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1026,8 +989,9 @@ public partial class @IAS_Default_InputMap: IInputActionCollection2, IDisposable
     }
     public interface IPlayerActions
     {
-        void OnLook(InputAction.CallbackContext context);
+        void OnMove(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnDrag(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {

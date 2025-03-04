@@ -6,7 +6,7 @@
             "id": "df70fa95-8a34-4494-b137-73ab6b9c7d37",
             "actions": [
                 {
-                    "name": "Look",
+                    "name": "Move",
                     "type": "Value",
                     "id": "6b444451-8a00-4d00-a97e-f47457f736a8",
                     "expectedControlType": "Vector2",
@@ -20,22 +20,20 @@
                     "id": "6c2ab1b8-8984-453a-af3d-a3c78ae1679a",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Hold",
+                    "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Drag",
+                    "type": "Value",
+                    "id": "98695c8b-7ffc-44ef-8209-77c457bb8d88",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "c1f7a91b-d0fd-4a62-997e-7fb9b69bf235",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "8c8e490b-c610-4785-884f-f04217b23ca4",
@@ -43,29 +41,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse;Touch",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3e5f5442-8668-4b27-a940-df99bad7e831",
-                    "path": "<Joystick>/{Hatswitch}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Joystick",
-                    "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "143bb1cd-cc10-4eca-a2f0-a3664166fe91",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "Interact",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -83,7 +59,7 @@
                 {
                     "name": "",
                     "id": "886e731e-7071-4ae4-95c0-e61739dad6fd",
-                    "path": "<Touchscreen>/primaryTouch/tap",
+                    "path": "<Touchscreen>/Press",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Touch",
@@ -93,34 +69,12 @@
                 },
                 {
                     "name": "",
-                    "id": "ee3d0cd2-254e-47a7-a8cb-bc94d9658c54",
-                    "path": "<Joystick>/trigger",
+                    "id": "b3f9fa6d-0418-4b23-9a88-9167cc8ac65a",
+                    "path": "<Pointer>/position",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Joystick",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8255d333-5683-4943-a58a-ccb207ff1dce",
-                    "path": "<XRController>/{PrimaryAction}",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "XR",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b3c1c7f0-bd20-4ee7-a0f1-899b24bca6d7",
-                    "path": "<Keyboard>/enter",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Interact",
+                    "groups": ";Keyboard&Mouse;Touch",
+                    "action": "Drag",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
